@@ -56,6 +56,7 @@ public class BlankSandbox {
 		            }
 		        }
 		    	l.setText(results);
+		    	System.out.println(results);
 			}
         });
        
