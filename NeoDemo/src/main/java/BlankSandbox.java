@@ -30,6 +30,7 @@ public class BlankSandbox {
     public static void main(String...args) {
     	
     	JFrame a = new JFrame("Basic Example");
+    	a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	JButton b = new JButton("Get Results");
     	JPanel p = new JPanel(); 
     	final JLabel l = new JLabel();
