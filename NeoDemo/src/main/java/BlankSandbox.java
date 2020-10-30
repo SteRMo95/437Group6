@@ -16,13 +16,13 @@ public class BlankSandbox {
 	
 	/*
 	THIS INFO IS TO ACCESS A SPECIFIC CLOUD DATABASE AND IS SUBJECT TO CHANGE UPON EXPIRATION/USING YOUR OWN CLOUD SANDBOX
-	REPLACE VIA TAB UNDER NEO4J SANDBOX IN PROJECT LIST
+	REPLACE VIA DROPDOWN, CONNECT VIA DRIVERS TAB UNDER NEO4J SANDBOX IN PROJECT LIST
 	SELECT JAVA FROM LANGUAGES
 	COPY AND PASTE FIRST 2 LINES UNDER MAIN()
 	 */
 	//BEGIN DB INFO
-	public static Config noSSL = Config.build().withEncryptionLevel(Config.EncryptionLevel.NONE).toConfig();
-	public static Driver driver = GraphDatabase.driver("bolt://100.25.200.249:32884",AuthTokens.basic("neo4j","exits-girls-runout"),noSSL); // <password>
+    public static Config noSSL = Config.build().withEncryptionLevel(Config.EncryptionLevel.NONE).toConfig();
+    public static Driver driver = GraphDatabase.driver("bolt://100.25.221.22:42385",AuthTokens.basic("neo4j","chance-effect-huts"),noSSL); // <password>
 	//END DB INFO
 	
 	public static JLabel l;
@@ -48,12 +48,10 @@ public class BlankSandbox {
 			public void actionPerformed(ActionEvent e) {
 				String results = "";			
 		    	try (Session session = driver.session()) {
-		            String cypherQuery =
-		                "MATCH (n) " + 
-		                "RETURN id(n) AS id";
+		            String cypherQuery = "Match (m:Movie) RETURN m.title";
 		            StatementResult result = session.run(cypherQuery, parameters());
 		            while (result.hasNext()) {
-		                results += result.next().get("id") + " ";
+		                results += result.next().get("m.title") + " \r\n";
 		            }
 		        }
 		    	l.setText(results);
