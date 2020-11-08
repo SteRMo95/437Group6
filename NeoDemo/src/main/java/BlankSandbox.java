@@ -291,13 +291,14 @@ public class BlankSandbox {
 				ArrayList resultList = new ArrayList();
 				String results = "";	
 				int numDisplayed = 0;
+				exceptionDisplay.setText("");
 		    	try (Session session = driver.session()) {
-		            String cypherQuery = "Match (m:Movie) RETURN m.title";
+		            String cypherQuery = queryInput.getText();
 		            StatementResult result = session.run(cypherQuery, parameters());
 	            	
 		            //While results remain, add them to a list
 		            while (result.hasNext()) {
-		                resultList.add( result.next().get("m.title") + "");
+		                resultList.add( result.next().values() + "");
 		                System.out.println(results);
 		            }
 		            
