@@ -37,9 +37,10 @@ public class BlankSandbox {
     	
     	//Set everything up, initialize
     	
-    	//Create JFrames
+    	//Create overall application frame
     	JFrame overallJFrame = new JFrame("Movies Database Queries");
     	overallJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	overallJFrame.setLocationByPlatform(true);
     
     	
     	//Create buttons
