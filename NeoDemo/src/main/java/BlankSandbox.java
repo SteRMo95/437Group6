@@ -50,7 +50,7 @@ public class BlankSandbox {
     	exceptionDisplay.setEditable(false);
     	exceptionDisplay.setText("Any Exceptions Here");
     	
-    	final JTextArea queryInput = new JTextArea(1,3);
+    	final JTextArea queryInput = new JTextArea(1,40);
     	
     	//Put TextAreas in created Scrollpanes, setup scrollpanes
     	final JScrollPane resultsScrollPane = new JScrollPane(resultsArea);
@@ -62,17 +62,21 @@ public class BlankSandbox {
     	
     	//Create buttons
     	JButton readButton = new JButton("Read");
+    	JButton queryExecuteButton = new JButton("Arbitrary Query");
     	
     	//Create and setup Jpanel
     	JPanel guiPanel = new JPanel();
     	guiPanel.add(readButton);
     	JPanel resultsPanel = new JPanel();
     	JPanel exceptionPanel = new JPanel();
+    	JPanel queryPanel = new JPanel();
+    	queryPanel.add(queryInput);
+    	queryPanel.add(queryExecuteButton);
     	
     	//Split panes
     	JSplitPane resultsSplitPane = new JSplitPane(SwingConstants.HORIZONTAL, resultsScrollPane, exceptionScrollPane);
     	JSplitPane topOverallSplitPane = new JSplitPane(SwingConstants.VERTICAL, guiPanel, resultsSplitPane);
-    	JSplitPane overallPane = new JSplitPane(SwingConstants.HORIZONTAL, topOverallSplitPane, queryInput);
+    	JSplitPane overallPane = new JSplitPane(SwingConstants.HORIZONTAL, topOverallSplitPane, queryPanel);
     	
     	//Add components to panels
     	resultsPanel.add(overallPane);
