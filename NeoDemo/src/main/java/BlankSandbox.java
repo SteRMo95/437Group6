@@ -34,42 +34,55 @@ public class BlankSandbox {
 	
     public static void main(String...args) {
     	
-    	
     	//Set everything up, initialize
     	
     	//Create JFrames
-    	JFrame jframeCreate = new JFrame("Basic Example");
-    	jframeCreate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	JFrame overallJFrame = new JFrame("Movies Database Queries");
+    	overallJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
-    	//Create TextAreas
-    	
+    	//Create and setup TextAreas
     	final JTextArea l = new JTextArea(20,40);
-    	final JTextArea exceptionDisplay = new JTextArea(10,20);
-    	
-    	//Put TextAreas in Scrollpanes
-    	
-    	
-    	JButton b = new JButton("Get Results");
-    	JPanel p = new JPanel(); 
-    	
     	l.setEditable(false);
+    	final JTextArea exceptionDisplay = new JTextArea(10,20);
+    	exceptionDisplay.setEditable(false);
     	
-    	final JScrollPane resultsScrollPlane = new JScrollPane(l);
-    	resultsScrollPlane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    	//Put TextAreas in created Scrollpanes, setup scrollpanes
+    	final JScrollPane resultsScrollPane = new JScrollPane(l);
+    	final JScrollPane errorsScrollPane = new JScrollPane(exceptionDisplay);
+    	
+    	resultsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    	
+    	//Create buttons
+    	JButton readButton = new JButton("Read");
+    	
+    	//Create and setup Jpanel
+    	JPanel guiPanel = new JPanel();
+    	JPanel resultsPanel = new JPanel();
+    	JPanel exceptionPanel = new JPanel();
+    	
+    	//Split panes
+    	
+    	
+    	
+    	//Add components to panels
+    	resultsPanel.add(resultsScrollPane);
+    	resultsPanel.add(exceptionDisplay);
+    	resultsPanel.add(readButton);    	
+    	
+    	
     	l.setText("Query Results Here");
     	//b.setBounds(40,90,85,20);
-    	p.add(resultsScrollPlane);
-    	p.add(exceptionDisplay);
-    	p.add(b);
-    	jframeCreate.add(p);
-    	jframeCreate.setSize(1000,1000);
-    	jframeCreate.setVisible(true);
+
+    	overallJFrame.add(resultsPanel);
+    	//overallJFrame.add(exceptionPanel);
+    	overallJFrame.setSize(1000,500);
+    	overallJFrame.setVisible(true);
     	
     	
     	maxDisplayed = 50;
     	
     	//
-        b.addActionListener(new ActionListener() {
+        readButton.addActionListener(new ActionListener() {
         	
 			@Override
 			public void actionPerformed(ActionEvent e) {
