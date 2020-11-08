@@ -31,6 +31,7 @@ public class BlankSandbox {
     
 	public static JTextArea l;
 	public static JTextArea exceptionDisplay;
+	public static JTextArea queryInput;
 	
     public static void main(String...args) {
     	
@@ -41,40 +42,44 @@ public class BlankSandbox {
     	overallJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
     	//Create and setup TextAreas
-    	final JTextArea l = new JTextArea(20,40);
-    	l.setEditable(false);
-    	final JTextArea exceptionDisplay = new JTextArea(10,20);
+    	final JTextArea resultsArea = new JTextArea(20,40);
+    	resultsArea.setEditable(false);
+    	resultsArea.setText("Query Results Here");
+    	
+    	final JTextArea exceptionDisplay = new JTextArea(4,3);
     	exceptionDisplay.setEditable(false);
+    	exceptionDisplay.setText("Any Exceptions Here");
+    	
+    	final JTextArea queryInput = new JTextArea(1,3);
     	
     	//Put TextAreas in created Scrollpanes, setup scrollpanes
-    	final JScrollPane resultsScrollPane = new JScrollPane(l);
-    	final JScrollPane errorsScrollPane = new JScrollPane(exceptionDisplay);
+    	final JScrollPane resultsScrollPane = new JScrollPane(resultsArea);
+    	final JScrollPane exceptionScrollPane = new JScrollPane(exceptionDisplay);
+    	
     	
     	resultsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    	exceptionScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     	
     	//Create buttons
     	JButton readButton = new JButton("Read");
     	
     	//Create and setup Jpanel
     	JPanel guiPanel = new JPanel();
+    	guiPanel.add(readButton);
     	JPanel resultsPanel = new JPanel();
     	JPanel exceptionPanel = new JPanel();
     	
     	//Split panes
-    	
-    	
+    	JSplitPane resultsSplitPane = new JSplitPane(SwingConstants.HORIZONTAL, resultsScrollPane, exceptionScrollPane);
+    	JSplitPane topOverallSplitPane = new JSplitPane(SwingConstants.VERTICAL, guiPanel, resultsSplitPane);
+    	JSplitPane overallPane = new JSplitPane(SwingConstants.HORIZONTAL, topOverallSplitPane, queryInput);
     	
     	//Add components to panels
-    	resultsPanel.add(resultsScrollPane);
-    	resultsPanel.add(exceptionDisplay);
-    	resultsPanel.add(readButton);    	
+    	resultsPanel.add(overallPane);
     	
-    	
-    	l.setText("Query Results Here");
-    	//b.setBounds(40,90,85,20);
+    	resultsArea.setText("Query Results Here");
 
     	overallJFrame.add(resultsPanel);
-    	//overallJFrame.add(exceptionPanel);
     	overallJFrame.setSize(1000,500);
     	overallJFrame.setVisible(true);
     	
@@ -108,16 +113,15 @@ public class BlankSandbox {
 		            }
 		          
 		            //display the result string
-		            l.setText(results);
+		            resultsArea.setText(results);
 		            System.out.print(results);
 		            
 		        }
 		    	
-		    	/*
 		    	catch(Exception exception){
-		    		errorDisplay(exception, l);
+		    		errorDisplay(exception, exceptionDisplay);
 		    	}
-		    	*/
+		    	
 			}
         });
        
