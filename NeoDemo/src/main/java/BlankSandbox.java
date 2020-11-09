@@ -282,7 +282,10 @@ public class BlankSandbox {
 		            	cypherQuery += ":" + readNodeType.getText() + " {";
 		            }
 		            if (!readNodeKey.getText().isBlank()) {
-		            	cypherQuery += "" + readNodeKey.getText() + ":'" + readNodeValue.getText() + "'})";
+		            	cypherQuery += "" + readNodeKey.getText() + ":" + readNodeValue.getText() + "})";
+		            }
+		            else {
+		            	cypherQuery += "})";
 		            }
 		            
 		            cypherQuery += " RETURN ";
