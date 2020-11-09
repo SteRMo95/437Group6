@@ -67,10 +67,10 @@ public class BlankSandbox {
     
     	
     	//Create buttons
-    	JButton createButton = new JButton("Create");
-    	JButton readButton = new JButton("Read");
-    	JButton updateButton = new JButton("Update");
-    	JButton destroyButton = new JButton("Destroy");
+    	JButton createButton = new JButton("Create Node");
+    	JButton readButton = new JButton("Read Node");
+    	JButton updateButton = new JButton("Update Node");
+    	JButton destroyButton = new JButton("Destroy Node");
     	
     	JButton queryExecuteButton = new JButton("Arbitrary Query");   
     	
