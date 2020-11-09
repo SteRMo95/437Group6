@@ -291,7 +291,7 @@ public class BlankSandbox {
 		            cypherQuery += " RETURN ";
 		            cypherQuery += "n." + readNodeReturn.getText();
 		            
-		            System.out.println("Running query:" + cypherQuery);
+		            System.out.println("Running query: " + cypherQuery);
 		            
 		            StatementResult result = session.run(cypherQuery, parameters());
 	            	
@@ -303,7 +303,7 @@ public class BlankSandbox {
 		            
 		            //Sort the list
 		            Collections.sort(resultList);
-		            
+		             
 		            //for each in the list, add it to the result string
 		            for (Object title : resultList) {
 		            	results += title.toString() + "\r\n";
