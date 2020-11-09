@@ -107,8 +107,6 @@ public class BlankSandbox {
     	final JTextField destroyNodeValue = new JTextField(1);
     	final JTextField destroyNodeReturn = new JTextField(1);
     	
-    	final JTextField updateInput = new JTextField(1);
-    	final JTextField destroyInput = new JTextField(1);
     	
     	
     	//Put TextAreas in created panes, setup panes
@@ -169,7 +167,17 @@ public class BlankSandbox {
     	updatePanel.add(updateButton);
     	
     	JPanel destroyPanel = new JPanel();
-    	destroyPanel.add(destroyInput);
+    	destroyPanel.add(new JLabel ("Node Type"));
+    	destroyPanel.add(destroyNodeType);
+    	destroyPanel.add(new JLabel ("Match Key"));
+    	destroyPanel.add(destroyNodeKey);
+    	destroyPanel.add(new JLabel ("Match Value"));
+    	destroyPanel.add(destroyNodeValue);
+    	destroyPanel.add(new JLabel ("Return Value"));
+    	destroyPanel.add(destroyNodeReturn);
+    	for (int i = 0; i < 12; i++) {
+    		destroyPanel.add(new JLabel ("                                                               "));
+    	}
     	destroyPanel.add(destroyButton);
     	
     	JPanel resultsPanel = new JPanel();
@@ -209,7 +217,7 @@ public class BlankSandbox {
     	resultsArea.setText("Query Results Here");
 
     	overallJFrame.add(resultsPanel);
-    	overallJFrame.setSize(1000,500);
+    	overallJFrame.setSize(1000,600);
     	overallJFrame.setVisible(true);
     	
     	
@@ -247,7 +255,7 @@ public class BlankSandbox {
 		            
 		            Date date = new Date();
 		            date = new Date();
-		            exceptionDisplay.setText("Completed successfully (" + formatter.format(date) + ")");
+		            exceptionDisplay.setText("Completed CREATE successfully (" + formatter.format(date) + ")");
 		            
 		        }
 		    	
@@ -289,7 +297,7 @@ public class BlankSandbox {
 		            
 		            Date date = new Date();
 		            date = new Date();
-		            exceptionDisplay.setText("Completed successfully (" + formatter.format(date) + ")");
+		            exceptionDisplay.setText("Completed READ successfully (" + formatter.format(date) + ")");
 		            
 		        }
 		    	
@@ -331,7 +339,7 @@ public class BlankSandbox {
 		            
 		            Date date = new Date();
 		            date = new Date();
-		            exceptionDisplay.setText("Completed successfully (" + formatter.format(date) + ")");
+		            exceptionDisplay.setText("Completed UPDATE successfully (" + formatter.format(date) + ")");
 		        }
 		    	
 		    	catch(Exception exception){
@@ -372,7 +380,7 @@ public class BlankSandbox {
 		            
 		            Date date = new Date();
 		            date = new Date();
-		            exceptionDisplay.setText("Completed successfully (" + formatter.format(date) + ")");
+		            exceptionDisplay.setText("Completed DESTROY successfully (" + formatter.format(date) + ")");
 		            
 		        }
 		    	
