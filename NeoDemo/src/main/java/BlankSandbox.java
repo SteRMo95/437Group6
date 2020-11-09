@@ -127,7 +127,7 @@ public class BlankSandbox {
     	JPanel createPanel = new JPanel();
     	createPanel.add(new JLabel ("Node Type"));
     	createPanel.add(createNodeType);
-    	createPanel.add(new JLabel ("Match Key"));
+    	createPanel.add(new JLabel ("Node Key"));
     	createPanel.add(createNodeKey);
     	createPanel.add(new JLabel ("Match Value"));
     	createPanel.add(createNodeValue);
@@ -141,7 +141,7 @@ public class BlankSandbox {
     	JPanel readPanel = new JPanel();
     	readPanel.add(new JLabel ("Node Type"));
     	readPanel.add(readNodeType);
-    	readPanel.add(new JLabel ("Match Key"));
+    	readPanel.add(new JLabel ("Node Key"));
     	readPanel.add(readNodeKey);
     	readPanel.add(new JLabel ("Match Value"));
     	readPanel.add(readNodeValue);
@@ -155,7 +155,7 @@ public class BlankSandbox {
     	JPanel updatePanel = new JPanel();
     	updatePanel.add(new JLabel ("Node Type"));
     	updatePanel.add(updateNodeType);
-    	updatePanel.add(new JLabel ("Match Key"));
+    	updatePanel.add(new JLabel ("Node Key"));
     	updatePanel.add(updateNodeKey);
     	updatePanel.add(new JLabel ("Match Value"));
     	updatePanel.add(updateNodeValue);
@@ -169,7 +169,7 @@ public class BlankSandbox {
     	JPanel destroyPanel = new JPanel();
     	destroyPanel.add(new JLabel ("Node Type"));
     	destroyPanel.add(destroyNodeType);
-    	destroyPanel.add(new JLabel ("Match Key"));
+    	destroyPanel.add(new JLabel ("Node Key"));
     	destroyPanel.add(destroyNodeKey);
     	destroyPanel.add(new JLabel ("Match Value"));
     	destroyPanel.add(destroyNodeValue);
