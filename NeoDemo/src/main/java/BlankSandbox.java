@@ -274,13 +274,28 @@ public class BlankSandbox {
 				String results = "";	
 				int numDisplayed = 0;
 		    	try (Session session = driver.session()) {
-		            String cypherQuery = "Match (m:Movie) RETURN m.title";
+		            String cypherQuery = "Match (n";
+		            if (readNodeType.getText().isBlank()) {
+		            	cypherQuery += " {";
+		            }
+		            else {
+		            	cypherQuery += ":" + readNodeType.getText() + " {";
+		            }
+		            if (!readNodeKey.getText().isBlank()) {
+		            	cypherQuery += "" + readNodeKey.getText() + ":'" + readNodeValue.getText() + "'})";
+		            }
+		            
+		            cypherQuery += " RETURN ";
+		            cypherQuery += "n." + readNodeReturn.getText();
+		            
+		            System.out.println("Running query:" + cypherQuery);
+		            
 		            StatementResult result = session.run(cypherQuery, parameters());
 	            	
 		            //While results remain, add them to a list
 		            while (result.hasNext()) {
-		                resultList.add( result.next().get("m.title") + "");
-		                System.out.println(results);
+		                resultList.add( result.next().values()  + "");
+		                //System.out.println(results);
 		            }
 		            
 		            //Sort the list
