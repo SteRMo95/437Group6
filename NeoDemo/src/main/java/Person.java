@@ -1,4 +1,7 @@
+import org.neo4j.ogm.annotation.*;
 
+//@NodeEntity informs Neo4j that this object will need to be represented by a node in the resulting graph.
+@NodeEntity
 public class Person {
 
 	private int PersonID;
@@ -68,8 +71,5 @@ public class Person {
 	}
 	public void setZip(String zip) {
 		Zip = zip;
-	}
-	
-	
-	
+	}	
 }
