@@ -47,6 +47,8 @@ public class BlankSandbox {
 	public static JTextField readNodeReturn;
 	
 	public static JTextField updateNodeType;
+	public static JTextField updateOldNodeKey;
+	public static JTextField updateOldNodeValue;
 	public static JTextField updateNodeKey;
 	public static JTextField updateNodeValue;
 	public static JTextField updateNodeReturn;
@@ -99,6 +101,8 @@ public class BlankSandbox {
     	final JTextField readNodeReturn = new JTextField(1);
 
     	final JTextField updateNodeType = new JTextField(1);
+    	final JTextField updateOldNodeKey = new JTextField(1);
+    	final JTextField updateOldNodeValue = new JTextField(1);
     	final JTextField updateNodeKey = new JTextField(1);
     	final JTextField updateNodeValue = new JTextField(1);
     	final JTextField updateNodeReturn = new JTextField(1);
@@ -126,13 +130,13 @@ public class BlankSandbox {
    
     	JPanel guiPanel = new JPanel();
     	JPanel createPanel = new JPanel();
-    	createPanel.add(new JLabel ("Node Type"));
+    	createPanel.add(new JLabel ("Label"));
     	createPanel.add(createNodeType);
-    	createPanel.add(new JLabel ("Node Key"));
+    	createPanel.add(new JLabel ("Property"));
     	createPanel.add(createNodeKey);
-    	createPanel.add(new JLabel ("Match Value"));
+    	createPanel.add(new JLabel ("Value"));
     	createPanel.add(createNodeValue);
-    	createPanel.add(new JLabel ("Return Value"));
+    	createPanel.add(new JLabel ("Return Variable"));
     	createPanel.add(createNodeReturn);
     	for (int i = 0; i < 12; i++) {
     		createPanel.add(new JLabel ("                                                               "));
@@ -140,13 +144,13 @@ public class BlankSandbox {
     	createPanel.add(createButton);
     	
     	JPanel readPanel = new JPanel();
-    	readPanel.add(new JLabel ("Node Type"));
+    	readPanel.add(new JLabel ("Label"));
     	readPanel.add(readNodeType);
-    	readPanel.add(new JLabel ("Node Key"));
+    	readPanel.add(new JLabel ("Property"));
     	readPanel.add(readNodeKey);
-    	readPanel.add(new JLabel ("Match Value"));
+    	readPanel.add(new JLabel ("Value"));
     	readPanel.add(readNodeValue);
-    	readPanel.add(new JLabel ("Return Value"));
+    	readPanel.add(new JLabel ("Return Variable"));
     	readPanel.add(readNodeReturn);
     	for (int i = 0; i < 12; i++) {
     		readPanel.add(new JLabel ("                                                               "));
@@ -154,27 +158,31 @@ public class BlankSandbox {
     	readPanel.add(readButton);
     	
     	JPanel updatePanel = new JPanel();
-    	updatePanel.add(new JLabel ("Node Type"));
+    	updatePanel.add(new JLabel ("Label"));
     	updatePanel.add(updateNodeType);
-    	updatePanel.add(new JLabel ("Node Key"));
+    	updatePanel.add(new JLabel ("Old Property"));
+    	updatePanel.add(updateOldNodeKey);
+    	updatePanel.add(new JLabel ("Old Value"));
+    	updatePanel.add(updateOldNodeValue);
+    	updatePanel.add(new JLabel ("Property"));
     	updatePanel.add(updateNodeKey);
-    	updatePanel.add(new JLabel ("Match Value"));
+    	updatePanel.add(new JLabel ("Value"));
     	updatePanel.add(updateNodeValue);
-    	updatePanel.add(new JLabel ("Return Value"));
+    	updatePanel.add(new JLabel ("Return Variable"));
     	updatePanel.add(updateNodeReturn);
-    	for (int i = 0; i < 12; i++) {
+    	for (int i = 0; i < 8; i++) {
     		updatePanel.add(new JLabel ("                                                               "));
     	}
     	updatePanel.add(updateButton);
     	
     	JPanel destroyPanel = new JPanel();
-    	destroyPanel.add(new JLabel ("Node Type"));
+    	destroyPanel.add(new JLabel ("Label"));
     	destroyPanel.add(destroyNodeType);
-    	destroyPanel.add(new JLabel ("Node Key"));
+    	destroyPanel.add(new JLabel ("Property"));
     	destroyPanel.add(destroyNodeKey);
-    	destroyPanel.add(new JLabel ("Match Value"));
+    	destroyPanel.add(new JLabel ("Value"));
     	destroyPanel.add(destroyNodeValue);
-    	destroyPanel.add(new JLabel ("Return Value"));
+    	destroyPanel.add(new JLabel ("Return Variable"));
     	destroyPanel.add(destroyNodeReturn);
     	for (int i = 0; i < 12; i++) {
     		destroyPanel.add(new JLabel ("                                                               "));
@@ -233,18 +241,36 @@ public class BlankSandbox {
 				String results = "";	
 				int numDisplayed = 0;
 		    	try (Session session = driver.session()) {
-		            String cypherQuery = "Match (m:Movie) RETURN m.title";
+		            String cypherQuery = "Create (n";
+		            if (readNodeType.getText().isBlank()) {
+		            	cypherQuery += " {";
+		            }
+		            else {
+		            	cypherQuery += ":" + readNodeType.getText() + " {";
+		            }
+		            if (!readNodeKey.getText().isBlank()) {
+		            	cypherQuery += "" + readNodeKey.getText() + ":" + readNodeValue.getText() + "})";
+		            }
+		            else {
+		            	cypherQuery += "})";
+		            }
+		            
+		            cypherQuery += " RETURN ";
+		            cypherQuery += "n." + readNodeReturn.getText();
+		            
+		            System.out.println("Running query: " + cypherQuery);
+		            
 		            StatementResult result = session.run(cypherQuery, parameters());
 	            	
 		            //While results remain, add them to a list
 		            while (result.hasNext()) {
-		                resultList.add( result.next().get("m.title") + "");
-		                System.out.println(results);
+		                resultList.add( result.next().values()  + "");
+		                //System.out.println(results);
 		            }
 		            
 		            //Sort the list
 		            Collections.sort(resultList);
-		            
+		             
 		            //for each in the list, add it to the result string
 		            for (Object title : resultList) {
 		            	results += title.toString() + "\r\n";
